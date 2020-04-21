@@ -18,6 +18,6 @@ function ab = newton_rss2(K, a0, b0, H, f, ff, verbose)
         blow = min([ab(2,:), b0-9]);
         bhigh = max([ab(2,:), b0+0]);
         [A,B] = meshgrid(alow:0.1:ahigh,blow:0.4:bhigh);
-        plot3d_rss(f, A, B, false) %3D contour
+        plot3d(f, A, B, false) %3D contour
     end
 end

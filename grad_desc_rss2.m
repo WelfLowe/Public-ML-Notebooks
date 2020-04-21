@@ -19,6 +19,6 @@ function [as, bs] = grad_desc_rss2(K, a0, b0, learning_eps, f, ff, verbose)
         blow = min([bs.', b0-9]);
         bhigh = max([bs.', b0]);
         [A,B] = meshgrid(alow:0.1:ahigh,blow:0.4:bhigh);
-        plot3d_rss(f, A, B, false) %3D contour
+        plot3d(f, A, B, false) %3D contour
     end
 end

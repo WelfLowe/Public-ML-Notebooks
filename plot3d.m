@@ -1,4 +1,4 @@
-function plot3d_rss(f,A,B,real3d)
+function plot3d(f,A,B,real3d)
     Z = arrayfun(f,A,B);
     if real3d
         surf(A,B,Z)
