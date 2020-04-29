@@ -4,7 +4,9 @@ function [as, bs] = grad_desc_rss2(K, a0, b0, learning_eps, f, ff, verbose)
     as(1)=a0;
     bs(1)=b0;
     for k = 1:K
-        [grad_a, grad_b] = ff(as(k),bs(k));
+        grad_w = ff(as(k),bs(k));
+        grad_a = grad_w(1);
+        grad_b = grad_w(2);
         %learning_eps * [grad_a, grad_b].'
         as(k+1)= as(k) - learning_eps * grad_a;
         bs(k+1)= bs(k) - learning_eps * grad_b;

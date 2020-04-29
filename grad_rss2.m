@@ -1,4 +1,4 @@
-function [grad_a grad_b] = grad_rss2(a, b, X, Y)
+function grad_w = grad_rss2(a, b, X, Y)
     n = length(X);
     grad_a = 0;
     grad_b = 0;
@@ -9,4 +9,5 @@ function [grad_a grad_b] = grad_rss2(a, b, X, Y)
     end
     grad_a = -2*grad_a;
     grad_b = -2*grad_b;
+    grad_w = [grad_a; grad_b];
 end

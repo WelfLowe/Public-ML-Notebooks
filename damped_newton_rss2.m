@@ -4,7 +4,9 @@ function res = damped_newton_rss2(K, a0, b0, H, gamma, f, ff, verbose)
     ab(1,1)=a0;
     ab(2,1)=b0;
     for k = 1:K
-        [grad_a, grad_b] = ff(ab(1,k),ab(2,k));
+        grad_w = ff(ab(1,k),ab(2,k));
+        grad_a = grad_w(1);
+        grad_b = grad_w(2);
         %H_inv * [grad_a, grad_b].'
         ab(:,k+1)= ab(:,k) - H_inv * [grad_a, grad_b].';
         if f(ab(1,k+1),ab(2,k+1)) >= f(ab(1,k),ab(2,k)) 
