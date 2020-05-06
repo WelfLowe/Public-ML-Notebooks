@@ -10,5 +10,5 @@ function grad_ws = grad_mse(ws, m, grads, X, Y)
             grad_ws(j) = grad_ws(j) + tmp*grads{j}(ws,xi);
         end
     end
-    grad_ws = -1/2*grad_ws;
+    grad_ws = -2/N*grad_ws;
 end
