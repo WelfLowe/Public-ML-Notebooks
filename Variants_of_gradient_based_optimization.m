@@ -136,9 +136,9 @@ hold off
 optimize_hyperparameters_adam = true;
 if optimize_hyperparameters_adam
     learning_epss = 0.01:0.01:1;
-    rho1s = 0.9:0.001:1;
-    rho2s = 0.9:0.001:1;
-    hyper_param_loss = zeros(length(learning_epss),length(rho1s),length(rho2s));
+    rho1s = 0.9:0.001:0.99;
+    rho2s = 0.9:0.001:0.99;
+    hyper_param_loss = 100*ones(length(learning_epss),length(rho1s),length(rho2s));
     i=1;
     for learning_eps=learning_epss
         j=1;
@@ -149,7 +149,7 @@ if optimize_hyperparameters_adam
                 iter = 10;
                 for l=1:10            
                     [ws, history] = adam_mse(K, ws0, learning_eps, mse1, grad_loss2, N*N, rho1, rho2, false);
-                    this_loss = mse1(ws);
+                    this_loss = history(end);
                     if isnan(this_loss)
                         continue;
                     end
@@ -162,4 +162,6 @@ if optimize_hyperparameters_adam
         end
         i=i+1;
     end
+    [v,loc] = min(hyper_param_loss(:));
+    [i,j,k] = ind2sub(size(hyper_param_loss),loc)
 end

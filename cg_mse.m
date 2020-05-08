@@ -2,7 +2,6 @@ function [ws, history] = cg_mse(K, ws, loss, stochastic_loss, grad_loss, N, verb
     %initialization
     batch_size = N*0.01;
     history(1) = loss(ws);
-    epsilon_star = 0.00001;
     %we only need variables at t (var) and t-1 (var_old) 
     rho_old = zeros(length(ws),1);
     grad_ws_old = zeros(length(ws),1);
@@ -12,14 +11,16 @@ function [ws, history] = cg_mse(K, ws, loss, stochastic_loss, grad_loss, N, verb
         %Compute gradient
         grad_ws = grad_loss(ws, randices);
         if k==1
-           rho = - grad_ws;
+            %Linear cg, i.e., no search direction adjustment in the first round
+            rho = - grad_ws;
         else
             %Compute Polak-Ribière
             beta = ((grad_ws - grad_ws_old)' * grad_ws) /(grad_ws_old' * grad_ws_old);
             %Compute search direction
             rho = - grad_ws + beta*rho_old;
         end
-        %Search for epsilon* = argmin stochastic_loss(ws+epsilon * rho)
+        %Naive line search for epsilon* = argmin stochastic_loss(ws+epsilon * rho)
+        epsilon_star = 0.00001;
         minimum_star = stochastic_loss(ws+epsilon_star*rho,randices);
         for epsilon = 0.00001:0.0001:1
             minimum = stochastic_loss(ws+epsilon*rho,randices);
