@@ -1,7 +1,7 @@
-function res = ite(cond, tc, fc)
-    if (cond)
-        res = tc;
+function res = ite(b,t,f)
+    if b
+        res=t;
     else
-        res = fc;
-    end
+        res=f;
+    end    
 end
