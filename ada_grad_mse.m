@@ -7,7 +7,7 @@ function [ws, history] = ada_grad_mse(K, ws, learning_eps, loss, grad_loss, N, v
         randices = randsample(1:N,batch_size,false);
         grad_ws = grad_loss(ws, randices);
         old_ws = ws;
-        r = r + grad_ws .* grad_ws; 
+        r = r + grad_ws .* grad_ws;
         ws= old_ws - learning_eps/(delta+sqrt(r)) .* grad_ws;
         if verbose
             line([old_ws(1),ws(1)],[old_ws(2),ws(2)]);
