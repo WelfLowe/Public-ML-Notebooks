@@ -14,7 +14,7 @@ function [ws, history] = adam_mse(K, ws, learning_eps, loss, grad_loss, N, rho1,
         r = rho2*r + (1-rho2) * grad_ws .* grad_ws; 
         s_hat = s/(1-rho1^t);
         r_hat = r/(1-rho2^t);
-        ws= old_ws - (learning_eps*s_hat)/(delta+sqrt(r));
+        ws= old_ws - (learning_eps*s_hat)/(delta+sqrt(r_hat));
         if verbose
             line([old_ws(1),ws(1)],[old_ws(2),ws(2)]);
         end
