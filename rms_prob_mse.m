@@ -9,6 +9,7 @@ function [ws, history] = rms_prob_mse(K, ws, learning_eps, loss, grad_loss, N, r
         old_ws = ws;
         r = rho*r + (1-rho) * grad_ws .* grad_ws; 
         ws= old_ws - learning_eps/(sqrt(delta+r)) .* grad_ws;
+        %fprintf('r[%s] eps[%s]\n', sprintf('%g ',r), sprintf('%g ',learning_eps./(delta+sqrt(r))))
         if verbose
             line([old_ws(1),ws(1)],[old_ws(2),ws(2)]);
         end

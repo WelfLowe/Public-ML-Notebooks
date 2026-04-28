@@ -1,4 +1,4 @@
-function err = mse(ws,m,X,Y)
+function err = mse(ws,m,X,Y) %m is a model function
     N = length(X);
     err = 0;
     for i=1:N
